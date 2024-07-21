@@ -1,27 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1.0/user/login", {
+        loginId: email,
+        password: password,
+      });
+
+      console.log('Login successful:', response.data);
+      alert(`Welcome ${response.data.fullName}!`)
+    } catch (error) {
+      console.error('Login error:', error.response?.data || error.message);
+      alert('Invalid credentials!')
+    }
+  }
+
   return (
     <section className="bg-gray-100 md:py-16">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-        {/* <a
-          href="#"
-          className="flex items-center mb-6 text-2xl font-semibold text-gray-900"
-        >
-          <img
-            className="w-8 h-8 mr-2"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-            alt="logo"
-          />
-          Flowbite
-        </a> */}
         <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+
+            <form className="space-y-4 md:space-y-6" method="post" onSubmit={handleSubmit}>
               <div>
                 <label
                   for="email"
@@ -33,6 +44,8 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="name@company.com"
                   required=""
@@ -49,20 +62,23 @@ const Login = () => {
                   type="password"
                   name="password"
                   id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   required=""
                 />
               </div>
               <div className="flex items-center justify-between">
-                <div className="flex items-start">
+                {/* <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
                       id="remember"
                       aria-describedby="remember"
                       type="checkbox"
+                      checked={!rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
                       className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-700 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                      required=""
                     />
                   </div>
                   <div className="ml-3 text-sm">
@@ -73,7 +89,7 @@ const Login = () => {
                       Remember me
                     </label>
                   </div>
-                </div>
+                </div> */}
                 <a
                   href="#"
                   className="text-sm font-medium text-blue-600 hover:underline"
@@ -96,6 +112,7 @@ const Login = () => {
                 </Link>
               </p>
             </form>
+
           </div>
         </div>
       </div>
