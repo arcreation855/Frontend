@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,17 +16,26 @@ const Login = () => {
       });
 
       console.log('Login successful:', response.data);
-      alert(`Welcome ${response.data.fullName}!`)
+
+      // Saving JWT token to localStorage with expiration
+      const token = response.data.jwtToken;
+      const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000; // 1 day from now
+      localStorage.setItem("jwtToken", token);
+      localStorage.setItem("tokenExpiration", expirationTime);
+
+      localStorage.setItem("loginId", response.data.loginId);
+
+      alert(`Welcome ${response.data.fullName}!`);
     } catch (error) {
       console.error('Login error:', error.response?.data || error.message);
-      alert('Invalid credentials!')
+      alert('Invalid credentials!');
     }
-  }
+  };
 
   return (
     <section className="bg-gray-100 md:py-16">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:border-gray-700">
+        <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Sign in to your account
@@ -35,7 +44,7 @@ const Login = () => {
             <form className="space-y-4 md:space-y-6" method="post" onSubmit={handleSubmit}>
               <div>
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Your email
@@ -48,12 +57,12 @@ const Login = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="name@company.com"
-                  required=""
+                  required
                 />
               </div>
               <div>
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Password
@@ -66,7 +75,7 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  required=""
+                  required
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -90,12 +99,12 @@ const Login = () => {
                     </label>
                   </div>
                 </div> */}
-                <a
-                  href="#"
-                  className="text-sm font-medium text-blue-600 hover:underline"
-                >
-                  Forgot password?
-                </a>
+                <Link to={"/forgot-password"}>
+                  <span
+                    className="text-sm font-medium text-blue-600 hover:underline"
+                  >
+                    Forgot password?
+                  </span></Link>
               </div>
               <button
                 type="submit"
@@ -103,16 +112,15 @@ const Login = () => {
               >
                 Sign in
               </button>
-              <p className="text-sm font-light text-gray-800 dark:text-gray-800">
+              <p className="text-sm font-light text-gray-800">
                 Don’t have an account yet?{" "}
                 <Link to="/signup">
-                  <a className="font-medium text-blue-600 hover:underline">
+                  <span className="font-medium text-blue-600 hover:underline">
                     Sign up
-                  </a>
+                  </span>
                 </Link>
               </p>
             </form>
-
           </div>
         </div>
       </div>

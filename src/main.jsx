@@ -16,6 +16,8 @@ import Cart from './Components/Cart/Cart.jsx'
 import TermsConditions from './Components/SubPages/TermsConditions.jsx'
 import ProductList from './Components/Product/ProductList.jsx'
 import ProductDetails from './Components/Product/ProductDetails.jsx'
+import ForgetPassword from './Components/Auth/ForgetPassword.jsx'
+import ResetPassword from './Components/Auth/ResetPassword.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,8 +34,9 @@ const router = createBrowserRouter(
       <Route path='faq' element={<FAQ />} />
       <Route path='privacy-policy' element={<PrivacyPolicy />} />
       <Route path='product-details' element={<ProductDetails />} />
-      <Route path='login' element={<Login />} />
       <Route path='terms-conditions' element={<TermsConditions />} />
+      <Route path='forgot-password' element={<ForgetPassword/>} />
+      <Route path='reset-password' element={<ResetPassword/>} />
       {/* <Route path='user/:userid' element={<User />} /> */}
     </Route>
   )
