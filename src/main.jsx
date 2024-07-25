@@ -18,6 +18,7 @@ import ProductList from './Components/Product/ProductList.jsx'
 import ProductDetails from './Components/Product/ProductDetails.jsx'
 import ForgetPassword from './Components/Auth/ForgetPassword.jsx'
 import ResetPassword from './Components/Auth/ResetPassword.jsx'
+import ReturnProduct from './Components/ReturnProduct/ReturnProduct.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
       <Route path='terms-conditions' element={<TermsConditions />} />
       <Route path='forgot-password' element={<ForgetPassword/>} />
       <Route path='reset-password' element={<ResetPassword/>} />
+      <Route path='return-product' element={<ReturnProduct/>} />
       {/* <Route path='user/:userid' element={<User />} /> */}
     </Route>
   )

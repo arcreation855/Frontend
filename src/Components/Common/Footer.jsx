@@ -17,7 +17,7 @@ const Footer = () => {
           <li className="hover:underline">Return Policy</li>
           <li className="hover:underline">Shipping Policy</li>
           <li className="hover:underline">Partner With Us</li>
-          <li className="hover:underline">Create a Return</li>
+          <Link to={"/return-product"}><li className="hover:underline">Create a Return</li></Link>
           <Link to="/shop">
             <li className="hover:underline">Shop</li>
           </Link>

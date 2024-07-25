@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { RxCross2 } from "react-icons/rx";
+import { FiPlus } from "react-icons/fi";
+import { LuMinus } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -76,7 +81,7 @@ export default function Cart() {
   };
 
   return (
-    <section className="bg-gray-50 py-8 antialiased md:py-16">
+    <section className="bg-gray-100 py-8 antialiased md:py-16">
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl">
           Your Shopping Cart
@@ -116,21 +121,7 @@ export default function Cart() {
                           className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100"
                           onClick={() => handleDecrement(product.id)}
                         >
-                          <svg
-                            className="h-2.5 w-2.5 text-gray-900"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 18 2"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M1 1h16"
-                            />
-                          </svg>
+                          <LuMinus />
                         </button>
                         <input
                           type="text"
@@ -149,21 +140,7 @@ export default function Cart() {
                           className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100"
                           onClick={() => handleIncrement(product.id)}
                         >
-                          <svg
-                            className="h-2.5 w-2.5 text-gray-900"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 18 18"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M9 1v16M1 9h16"
-                            />
-                          </svg>
+                          <FiPlus />
                         </button>
                       </div>
                       <div className="text-end md:order-4 md:w-32">
@@ -188,23 +165,7 @@ export default function Cart() {
                           type="button"
                           className="inline-flex items-center text-sm font-medium text-red-600 hover:underline"
                         >
-                          <svg
-                            className="me-1.5 h-5 w-5"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M6 18 17.94 6M18 18 6.06 6"
-                            />
-                          </svg>
+                          <RxCross2 className="mr-1" />
                           Remove
                         </button>
                       </div>
@@ -252,7 +213,7 @@ export default function Cart() {
                   </dl>
                 </div>
 
-                <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
+                <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2">
                   <dt className="text-base font-bold text-gray-900">Total</dt>
                   <dd className="text-base font-bold text-gray-900">$8,191.00</dd>
                 </dl>
@@ -267,28 +228,15 @@ export default function Cart() {
 
               <div className="flex items-center justify-center gap-2">
                 <span className="text-sm font-normal text-gray-500"> or </span>
-                <a
-                  href="#"
-                  title=""
-                  className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 underline hover:no-underline"
-                >
-                  Continue Shopping
-                  <svg
-                    className="h-5 w-5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
+                <Link to={"/shop"}>
+                  <a
+                    href="#"
+                    title=""
+                    className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 underline hover:no-underline"
                   >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 12H5m14 0-4 4m4-4-4-4"
-                    />
-                  </svg>
-                </a>
+                    Continue Shopping
+                    <FaArrowRightLong />
+                  </a></Link>
               </div>
             </div>
           </div>

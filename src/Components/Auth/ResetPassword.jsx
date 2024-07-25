@@ -21,7 +21,7 @@ const ResetPassword = () => {
     try {
       const response = await axios.post("http://localhost:8080/api/v1.0/user/forgot", {
         loginId: email,
-        otp: otp, // Assuming the OTP acts as the old password for verification
+        otp: otp,
         newPassword: newPassword,
       });
 
