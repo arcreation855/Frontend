@@ -72,7 +72,7 @@ const RegisterUser = () => {
               Create an account
             </h1>
 
-            <form className="space-y-4 md:space-y-6" method="post" onSubmit={handleSubmit}>
+            <form className="space-y-4 md:space-y-6" method="POST" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="email"

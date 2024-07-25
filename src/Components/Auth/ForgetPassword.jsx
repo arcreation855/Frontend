@@ -31,7 +31,7 @@ const ForgetPassword = () => {
             Reset Password
           </h2>
 
-          <form className="mt-4 space-y-4 lg:mt-5 md:space-y-5" onSubmit={handleSubmit}>
+          <form className="mt-4 space-y-4 lg:mt-5 md:space-y-5" method="POST" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
                 Please enter your email to receive OTP to reset your password.
