@@ -77,6 +77,7 @@ const Navbar = () => {
                 <Link to="/about">
                   <li className="hover:underline">About us</li>
                 </Link>
+                <li className="hover:underline">Buy in Wholesale</li>
                 <Link to="/blogs">
                   <li className="hover:underline">Blogs</li>
                 </Link>
