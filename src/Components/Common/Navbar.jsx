@@ -77,7 +77,7 @@ const Navbar = () => {
                 <Link to="/about">
                   <li className="hover:underline">About us</li>
                 </Link>
-                <li className="hover:underline">Buy in Wholesale</li>
+                <li className="hover:underline"><a href="https://m.indiamart.com/ar-traders-firozabad/?pos=1&kwd=ar%20traders&tags=||Pref|Loc|0.0||company|pfSt|firozabad|TS|rsf:cmp-|-cq:firozabad|stype:attr=1-br|qr_nm:gd|res:RC4|com-cf:hh|ptrs:na|ktp:N0|mtp:no|qry_typ:C|lang:en|wc:3|cs:9899/" target="_blank">Buy in Wholesale</a></li>
                 <Link to="/blogs">
                   <li className="hover:underline">Blogs</li>
                 </Link>

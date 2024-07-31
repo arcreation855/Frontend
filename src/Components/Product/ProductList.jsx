@@ -25,6 +25,10 @@ const ProductList = () => {
     setCurrentPage(newPage);
   };
 
+  const handleProductClick = (productId) => {
+    localStorage.setItem("product_id", productId);
+  };
+
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentProducts = products.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
@@ -37,8 +41,12 @@ const ProductList = () => {
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {currentProducts.map((product) => (
-            <Link to="/product-details">
-              <div key={product.id} className="group relative">
+            <Link
+              to="/product-details"
+              onClick={() => handleProductClick(product.product.id)}
+              key={product.id}
+            >
+              <div className="group relative">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
                     alt="Product Image"
@@ -62,7 +70,7 @@ const ProductList = () => {
                     ₹ {product.product.productPrice}
                   </p>
                 </div>
-              </div>{" "}
+              </div>
             </Link>
           ))}
         </div>
