@@ -10,6 +10,8 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navbarRef = useRef(null);
 
+  const token = localStorage.getItem("jwtToken");
+
   const handleSearchClick = () => {
     setIsSearchVisible(true);
   };
@@ -28,7 +30,6 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("jwtToken");
     const expiration = localStorage.getItem("tokenExpiration");
     const isTokenValid = token && expiration && new Date().getTime() < expiration;
 
@@ -36,8 +37,7 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = async () => {
-    const token = localStorage.getItem("jwtToken");
-    const loginId = localStorage.getItem("loginId"); // Replace with actual loginId logic
+    const loginId = localStorage.getItem("loginId");
 
     if (token) {
       try {

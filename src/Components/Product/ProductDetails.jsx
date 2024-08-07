@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function ProductDetails() {
-
   const [productData, setProductData] = useState({
     product: {
       productName: "",
@@ -17,9 +16,11 @@ export default function ProductDetails() {
   });
 
   const productId = localStorage.getItem("product_id");
+  const loginId = localStorage.getItem("loginId");
+  const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProductDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/api/v1.0/product/get/${productId}`);
         setProductData(response.data);
@@ -28,8 +29,30 @@ export default function ProductDetails() {
       }
     };
 
-    fetchProducts();
+    fetchProductDetails();
   }, [productId]);
+
+  const handleAddToCart = async (productId, loginId) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/api/v1.0/user/cart/add`,
+        {
+          productId: productId,
+          userId: loginId,
+          productCount: 1 // You can update the quantity as needed
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      alert("Product added to cart successfully!");
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -103,14 +126,13 @@ export default function ProductDetails() {
               ₹{productData.product.productPrice} <s className="text-xl text-gray-500">₹699</s>
             </p>
 
-            <form className="mt-10">
-              <button
-                type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Add to bag
-              </button>
-            </form>
+            <button
+              type="button"
+              className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              onClick={() => handleAddToCart(productId, loginId)}
+            >
+              Add to Cart
+            </button>
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
